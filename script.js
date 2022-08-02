@@ -1,5 +1,24 @@
 "use strict";
 
+let expression = "";
+
+const numberButtons = document.querySelectorAll(".number");
+numberButtons.forEach(button => button.addEventListener('click', (e) => {
+    write(e.target.getAttribute('data-value'));
+}));
+
+
+function updateDisplay()
+{
+    document.querySelector(".display").textContent = expression;
+}
+
+function write(newChar)
+{
+    expression += newChar;
+    updateDisplay();
+}
+
 function operate(value1, value2, operation)
 {
     switch(operation)
