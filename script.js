@@ -54,7 +54,7 @@ function evaluateExpression()
         {
             if (opStack.length > 0 && 
                 evaluatePrecedence(opStack[opStack.length -1]) 
-                >= evaluatePrecedence(expressionStack[i]))
+                >= evaluatePrecedence(expressionStack[expressionStack.length-1]))
             {
                 numStack.push(operate(numStack.pop(), numStack.pop(), opStack.pop()));
                 opStack.push(expressionStack.pop());
