@@ -8,8 +8,10 @@ numberButtons.forEach(button => button.addEventListener('click', (e) => {
 }));
 
 const clearButton = document.querySelector(".clear");
-clearButton.addEventListener('click', () => clear())
+clearButton.addEventListener('click', clear);
 
+const delButton = document.querySelector(".delete");
+delButton.addEventListener('click', del)
 
 function updateDisplay()
 {
@@ -25,6 +27,12 @@ function write(newChar)
 function clear()
 {
     expression = "";
+    updateDisplay();
+}
+
+function del()
+{
+    expression = expression.slice(0, -1);
     updateDisplay();
 }
 
