@@ -7,6 +7,11 @@ numberButtons.forEach(button => button.addEventListener('click', (e) => {
     write(e.target.getAttribute('data-value'));
 }));
 
+const operationButtons = document.querySelectorAll(".operation");
+operationButtons.forEach(button => button.addEventListener('click', (e) => {
+    write(e.target.getAttribute('data-value'));
+}));
+
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener('click', clear);
 
