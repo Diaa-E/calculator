@@ -45,6 +45,7 @@ function evaluateExpression()
     let opStack = [];
     let numStack = [];
 
+    //Unload the expression into the operation and number stacks
     while (expressionStack.length > 0)
     {
         if (expressionStack[expressionStack.length -1] === '+' 
@@ -71,6 +72,7 @@ function evaluateExpression()
         }
     }
 
+    //Evaluate final result
     while (opStack.length > 0)
     {
         numStack.push(operate(numStack.pop(), numStack.pop(), opStack.pop()));
