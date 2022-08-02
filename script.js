@@ -7,6 +7,9 @@ numberButtons.forEach(button => button.addEventListener('click', (e) => {
     write(e.target.getAttribute('data-value'));
 }));
 
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener('click', () => clear())
+
 
 function updateDisplay()
 {
@@ -16,6 +19,12 @@ function updateDisplay()
 function write(newChar)
 {
     expression += newChar;
+    updateDisplay();
+}
+
+function clear()
+{
+    expression = "";
     updateDisplay();
 }
 
