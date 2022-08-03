@@ -110,6 +110,17 @@ function evaluateExpression()
     }
 
     expression = numStack.pop();
+
+    //catch division by zero
+    if (expression === Infinity)
+    {
+        console.log("You just created a blackhole!");
+        expression = "";
+    }
+
+    //When the expression is evaluated after a calculation it becomes a number
+    //all string functions cause an error then
+    expression = expression.toString();
     updateDisplay();
 }
 
@@ -128,9 +139,6 @@ function evaluatePrecedence(operation)
 
 function updateDisplay()
 {
-    //When the expression is evaluated after a calculation it becomes a number
-    //all string functions cause an error then
-    expression = expression.toString();
     document.querySelector(".display").textContent = expression;
 }
 
