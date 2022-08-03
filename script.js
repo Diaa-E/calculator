@@ -58,18 +58,18 @@ function getExpressionStack()
 
 function evaluateExpression()
 {
-    const illegalChars = /^[*()/+-.0123456789]/g;
+    const illegalChars = /^[\*\(\)\/\+\.0-9-]/g;
     //catch if the last token in the expression is not a number or right parantheses
     if (isNaN(+expression.charAt(expression.length -1)) 
         && expression.charAt(expression.length-1) !== ')')
     {
-        console.log("Syntax Error");
+        console.log("Syntax Error 1");
         return
     }
     //Check for illegal characters
-    else if (illegalChars.test(expression))
+    else if (!illegalChars.test(expression))
     {
-        console.log("Syntax Error");
+        console.log("Syntax Error 2");
         return
     }
 
@@ -128,6 +128,9 @@ function evaluatePrecedence(operation)
 
 function updateDisplay()
 {
+    //When the expression is evaluated after a calculation it becomes a number
+    //all string functions cause an error then
+    expression = expression.toString();
     document.querySelector(".display").textContent = expression;
 }
 
@@ -145,16 +148,8 @@ function clear()
 
 function del()
 {
-    if (expression.charAt(expression.length -1) === " ")
-    {
-        expression = expression.slice(0, -3); //remove the operation and its surrounding space
-        updateDisplay();
-    }
-    else
-    {
-        expression = expression.slice(0, -1);
-        updateDisplay();
-    }
+    expression = expression.slice(0, -1);
+    updateDisplay();
 }
 
 function operate(value1, value2, operation)
