@@ -28,13 +28,15 @@ Handling expressions :
 
     -While expression is NOT EMPTY
 
-        -If next character in expression is a number
+        -If next token in expression is a number and not the last token
             -Add token to test String
-            -continue loop
+        else if next token in expression is a number and is the last token
+            -Add token to test String
+            -push number into stack
         -else
-            -push test string into number stack
-            -clear test string
-            -push next token into Operation stack
+            -push number into stack
+            -clear number
+            -push next token into stack
 
 
 *Converting expression to postfix algorithm:

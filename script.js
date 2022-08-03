@@ -29,6 +29,33 @@ eqlButton.addEventListener('click', () => {
     console.log("event works")
 });
 
+function getExpressionStack()
+{
+    let expressionStack = [];
+    let tokens = expression.split("");
+    let number = "";
+
+    for (let i = 0; i < tokens.length; i++)
+    {
+        if (isNaN(+tokens[i]))
+        {
+            expressionStack.push(+number);
+            number = "";
+            expressionStack.push(tokens[i]);
+        }
+        else if (!isNaN(+tokens[i]) && i != tokens.length -1) //if it's not the last token
+        {
+            number += tokens[i];
+        }
+        else //if it's a number and the last element
+        {
+            number += tokens[i];
+            expressionStack.push(+number);
+        }
+    }
+
+    return expressionStack;
+}
 
 function evaluateExpression()
 {
@@ -41,7 +68,8 @@ function evaluateExpression()
 
     //each operation is sandwitched by a space on each side
     //!!!!caution: string ending with delimeter adds an empty element to the end of the array
-    const expressionStack = expression.split(" "); 
+    //const expressionStack = expression.split(" "); 
+    let expressionStack = getExpressionStack();
     let opStack = [];
     let numStack = [];
 
