@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+
+body {
+    font-family: 'Audiowide', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: gray;
+}
+
+.calculator-body{
+    background-image: linear-gradient(
+        135deg,
+        rgb(77, 96, 104) 0%,
+        rgb(112, 139, 150) 25%, 
+        rgb(77, 96, 104) 50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 500px;
+    width: 300px;
+    border-radius: 15px;
+    border-top: 10px solid rgb(112, 139, 150) ;
+    border-left: 10px solid rgb(112, 139, 150) ;
+    border-bottom: 10px solid rgb(57, 71, 77) ;
+    border-right: 10px solid rgb(57, 71, 77) ;
+}
+
+h1{
+    color: white;
+    text-shadow: 
+        2px 2px  rgb(100, 107, 114),
+        2px -2px rgb(100, 107, 114),
+        -2px 2px  rgb(100, 107, 114),
+        -2px -2px  rgb(100, 107, 114);
+}
+
+.display{
+    font-family: Consolas,monaco,monospace;
+    font-size: 20px;
+    color:rgb(45, 56, 43);
+    background-image: linear-gradient(
+        135deg,
+        rgb(100, 128, 96),
+        rgb(174, 202, 170),
+        rgb(100, 128, 96));
+    border-bottom: 10px solid rgb(112, 139, 150) ;
+    border-right: 10px solid rgb(112, 139, 150) ;
+    border-top: 10px solid rgb(57, 71, 77) ;
+    border-left: 10px solid rgb(57, 71, 77) ;
+    height: 100px;
+    width: 250px;
+    word-wrap: break-word;
+}
+
+.button-box{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 10px;
+    height: 300px;;
+}
+
+.numpad{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;;
+}
+
+.operations{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;;
+}
+
+.button{
+    font-family: inherit;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+}
+
+.number{
+    font-size: 20px;
+    color: white;
+    background-color: rgb(56, 56, 56);
+}
+
+.clear{
+    color: white;
+    background-color: rgb(148, 0, 0);
+}
+
+.delete{
+    background-color: rgb(255, 196, 86);
+}
