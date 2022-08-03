@@ -88,9 +88,15 @@ function checkSyntaxError()
     const pattern1 = /[\+\*\/]{2,}/g; //consecutive non-minus
     const pattern2 = /[\-][\+\*\/]+/g; //minus followed by anything
     const pattern3 = /[\/\*\+][\-]{2,}/g; //any op followed by more than 1 minus
+    const pattern4 = /[0-9]+[.]{2,}/g; //consecutive floating points
+    const pattern5 = /[0-9]+[.][0-9]+[.]/g; //repeated floating points
 
     //check for consecutive operations
-    if (pattern1.test(expression) || pattern2.test(expression) || pattern3.test(expression))
+    if (pattern1.test(expression)
+        || pattern2.test(expression) 
+        || pattern3.test(expression)
+        || pattern4.test(expression)
+        || pattern5.test(expression))
     {
         console.log('syntax error 3');
         return true;
