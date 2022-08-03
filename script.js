@@ -26,7 +26,6 @@ delButton.addEventListener('click', del)
 const eqlButton = document.querySelector('.equals');
 eqlButton.addEventListener('click', () => {
     evaluateExpression()
-    console.log("event works")
 });
 
 function getExpressionStack()
@@ -59,17 +58,22 @@ function getExpressionStack()
 
 function evaluateExpression()
 {
-    //catch if the last entered item is an operation
-    if (expression.charAt(expression.length -1) === " ")
+    const illegalChars = /^[*()/+-.0123456789]/g;
+    //catch if the last token in the expression is not a number or right parantheses
+    if (isNaN(+expression.charAt(expression.length -1)) 
+        && expression.charAt(expression.length-1) !== ')')
     {
-        console.log("Syntax Error: Each operator must have 2 operands");
+        console.log("Syntax Error");
+        return
+    }
+    //Check for illegal characters
+    else if (illegalChars.test(expression))
+    {
+        console.log("Syntax Error");
         return
     }
 
-    //each operation is sandwitched by a space on each side
-    //!!!!caution: string ending with delimeter adds an empty element to the end of the array
-    //const expressionStack = expression.split(" "); 
-    let expressionStack = getExpressionStack();
+    const expressionStack = getExpressionStack();
     let opStack = [];
     let numStack = [];
 
@@ -96,7 +100,6 @@ function evaluateExpression()
         else
         {
             numStack.push(+expressionStack.pop());
-            console.log(numStack)
         }
     }
 
