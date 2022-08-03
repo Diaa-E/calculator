@@ -148,7 +148,7 @@ function evaluateExpression()
         numStack.push(operate(numStack.pop(), numStack.pop(), opStack.pop()));
     }
 
-    expression = numStack.pop().toPrecision(3); //round to 2 decimal points
+    expression = numStack.pop()//.toPrecision(3); //round to 2 decimal points, causes scientific notation
 
     //catch division by zero
     if (expression === Infinity)
