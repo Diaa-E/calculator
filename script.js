@@ -36,7 +36,15 @@ function getExpressionStack()
 
     for (let i = 0; i < tokens.length; i++)
     {
-        if (tokens[i] === "+" || tokens[i] === "-" || tokens[i] === "/" || tokens[i] === "*")
+        if ((tokens[i] === '-' && tokens[i-1] === undefined) //negative sign at the start
+            || (tokens[i] === '-' && tokens[i-1] === '/')
+            || (tokens[i] === '-' && tokens[i-1] === '*')
+            || (tokens[i] === '-' && tokens[i-1] === '+')
+            || (tokens[i] === '-' && tokens[i-1] === '-')) //catch negative sign
+        {
+            number += tokens[i];
+        }
+        else if (tokens[i] === "+" || tokens[i] === "-" || tokens[i] === "/" || tokens[i] === "*")
         {
             expressionStack.push(+number);
             number = "";
@@ -60,7 +68,7 @@ function getExpressionStack()
     return expressionStack;
 }
 
-function evaluateExpression()
+function checkSyntaxError()
 {
     const illegalChars = /^[\*\/\+\.0-9-]/g;
     //catch if the last token in the expression is not a number or right parantheses
@@ -68,13 +76,34 @@ function evaluateExpression()
         && expression.charAt(expression.length-1) !== ')')
     {
         console.log("Syntax Error 1");
-        return
+        return true;
     }
     //Check for illegal characters
     else if (!illegalChars.test(expression))
     {
         console.log("Syntax Error 2");
-        return
+        return true;
+    }
+    
+    const pattern1 = /[\+\*\/]{2,}/g; //consecutive non-minus
+    const pattern2 = /[\-][\+\*\/]+/g; //minus followed by anything
+    const pattern3 = /[\/\*\+][\-]{2,}/g; //any op followed by more than 1 minus
+
+    //check for consecutive operations
+    if (pattern1.test(expression) || pattern2.test(expression) || pattern3.test(expression))
+    {
+        console.log('syntax error 3');
+        return true;
+    }
+
+    return false;
+}
+
+function evaluateExpression()
+{
+    if (checkSyntaxError())
+    {
+        return;
     }
 
     const expressionStack = getExpressionStack();
@@ -113,7 +142,7 @@ function evaluateExpression()
         numStack.push(operate(numStack.pop(), numStack.pop(), opStack.pop()));
     }
 
-    expression = numStack.pop().toPrecision(2); //round to 2 decimal points
+    expression = numStack.pop().toPrecision(3); //round to 2 decimal points
 
     //catch division by zero
     if (expression === Infinity)
