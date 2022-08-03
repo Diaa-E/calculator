@@ -36,13 +36,17 @@ function getExpressionStack()
 
     for (let i = 0; i < tokens.length; i++)
     {
-        if (isNaN(+tokens[i]))
+        if (tokens[i] === "+" || tokens[i] === "-" || tokens[i] === "/" || tokens[i] === "*")
         {
             expressionStack.push(+number);
             number = "";
             expressionStack.push(tokens[i]);
         }
-        else if (!isNaN(+tokens[i]) && i != tokens.length -1) //if it's not the last token
+        else if (tokens[i] === '.') //check for dots
+        {
+            number += tokens[i];
+        }
+        else if (i != tokens.length -1) //if it's not the last token
         {
             number += tokens[i];
         }
@@ -58,7 +62,7 @@ function getExpressionStack()
 
 function evaluateExpression()
 {
-    const illegalChars = /^[\*\(\)\/\+\.0-9-]/g;
+    const illegalChars = /^[\*\/\+\.0-9-]/g;
     //catch if the last token in the expression is not a number or right parantheses
     if (isNaN(+expression.charAt(expression.length -1)) 
         && expression.charAt(expression.length-1) !== ')')
@@ -109,7 +113,7 @@ function evaluateExpression()
         numStack.push(operate(numStack.pop(), numStack.pop(), opStack.pop()));
     }
 
-    expression = numStack.pop();
+    expression = numStack.pop().toPrecision(2); //round to 2 decimal points
 
     //catch division by zero
     if (expression === Infinity)
